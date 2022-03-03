@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Explore from "../views/Explore.vue";
-import Contact from "../views/Contact.vue";
 import Log from "../views/Log.vue";
 import Sign from "../views/Sign.vue";
+import Cart from "../views/Cart.vue";
+import Profile from "../views/Profile.vue";
 
 const routes = [
   {
@@ -17,20 +18,24 @@ const routes = [
     component: Explore,
   },
   {
-    path: "/contact",
-    name: "Contact",
-    component: Contact,
-  },
-  ,
-  {
     path: "/log",
-    name: "Log",
+    name: "Login",
     component: Log,
   },
   {
     path: "/sign",
     name: "Sign",
     component: Sign,
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
   },
 ];
 

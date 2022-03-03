@@ -17,7 +17,7 @@
       <button type="submit" class="form-btn border">Login</button>
       <h4>
         Don't have an accont?
-        <router-link to="/sign">Sign up</router-link>
+        <router-link to="/sign" class="other">Sign up</router-link>
       </h4>
     </form>
   </section>
@@ -33,7 +33,25 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.email, this.password);
+      fetch("https://back-end-pos-full-stack.herokuapp.com/users", {
+        method: "PATCH",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem("jwt", json.jwt);
+          alert("User logged in");
+          this.$router.push({ name: "Explore" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
     },
   },
 };
@@ -41,8 +59,8 @@ export default {
 
 <style>
 .border {
-  border-radius: 30px;
-  background: white;
+  border-radius: 25px;
+  background: #e1e5ee;
   box-shadow: 8px 8px 15px #e4e4e4, -8px -8px 15px #ffffff;
 }
 .border-input {
@@ -81,5 +99,12 @@ export default {
 
 .form-btn:hover {
   transform: scale(1.05);
+  background-color: #000;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.other:hover {
+  color: red;
 }
 </style>

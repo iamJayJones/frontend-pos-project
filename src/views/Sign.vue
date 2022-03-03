@@ -17,7 +17,7 @@
       class="form-input border-input"
       type="text"
       v-model="contact"
-      placeholder="Contact Number"
+      placeholder="Phone number"
     />
     <input
       class="form-input border-input"
@@ -28,7 +28,7 @@
     <button type="submit" class="form-btn border">Sign up</button>
     <h4>
       Got an account?
-      <router-link to="/log">Log in</router-link>
+      <router-link to="/log" class="chan">Log in</router-link>
     </h4>
   </form>
 </template>
@@ -45,7 +45,33 @@ export default {
   },
   methods: {
     register() {
-      console.log(this.name, this.email, this.contact, this.password);
+      console.log(this.name, this.email, this.password, this.contact);
+      fetch("https://back-end-pos-full-stack.herokuapp.com/users", {
+        method: "POST",
+        body: JSON.stringify({
+          name: this.name,
+          email: this.email,
+          contact: this.contact,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          localStorage.setItem("jwt", json.jwt);
+          alert("User is signed up");
+          (this.name = ""),
+            (this.email = ""),
+            (this.contact = ""),
+            (this.password = ""),
+            this.$router.push({ name: "Login" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
     },
   },
 };
@@ -54,7 +80,7 @@ export default {
 <style>
 .border {
   border-radius: 30px;
-  background: white;
+  background: #e1e5ee;
   box-shadow: 8px 8px 15px #e4e4e4, -8px -8px 15px #ffffff;
 }
 .border-input {
@@ -92,6 +118,9 @@ export default {
 
 .form-btn:hover {
   transform: scale(1.05);
+  background-color: #000;
+  color: #fff;
+  transition: 0.3s;
 }
 
 .form-social-login {
@@ -102,5 +131,9 @@ export default {
 .form-social-btn {
   width: 45%;
   color: #333;
+}
+
+.chan:hover {
+  color: red;
 }
 </style>

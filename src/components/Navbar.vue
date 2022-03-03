@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-      <a href="/" class="navbar-brand"><img src="" alt="logo" /></a>
+      <a href="/" class="navbar-brand"
+        ><img src="@/assets/rj_fit.jpeg" alt="logo"
+      /></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -22,17 +24,17 @@
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <!-- <div v-if="isLoggedIn"> -->
-            <li class="nav-item">
-              <router-link to="/explore" class="nav-link">Explore</router-link>
-            </li>
-          <!-- </div> -->
           <li class="nav-item">
-            <router-link to="/contact" class="nav-link">Contact</router-link>
+            <router-link to="/explore" class="nav-link">Explore</router-link>
           </li>
+          <!-- </div> -->
+          <!-- <li class="nav-item">
+            <router-link to="/user-pro" class="nav-link">Profiles</router-link>
+          </li> -->
           <!-- <div v-if="!isLoggedIn" class="we"> -->
-            <li class="nav-item">
-              <router-link to="/log" class="nav-link">Log in</router-link>
-            </li>
+          <li class="nav-item">
+            <router-link to="/log" class="nav-link">Log in</router-link>
+          </li>
           <!-- </div> -->
         </ul>
       </div>
@@ -46,7 +48,7 @@ export default {};
 
 <style>
 .navbar-brand {
-  font-size: 2.5rem !important;
+  /* font-size: !important; */
   color: red !important;
 }
 
